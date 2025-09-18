@@ -1,0 +1,2 @@
+2025-09-18 21:46:13,380 - root - INFO - Divided by zero
+2025-09-18 21:46:13,380 - root - ERROR - Error occurred in python script name [/media/shrav/New Volume/AI/MLOPS/Retail_Price_Optimization-MLOPS-/src/exception.py] line number [38] error message [division by zero]

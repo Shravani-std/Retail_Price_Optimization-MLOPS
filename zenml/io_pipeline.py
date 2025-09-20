@@ -13,7 +13,8 @@ logger = get_logger(__name__)
 @step
 def load_data() -> Tuple[
     Annotated[list[int], "features"],
-    Annotated[list[int], "labels"]
+    Annotated[list[int], "labels"],
+    
 ]:
     logger.info("Loading sample data")
     return [1, 2, 3, 4], [1, 0, 1, 0]
@@ -29,10 +30,20 @@ def count_rows(
     )
     return len(features)
 
+@step
+def add_col(
+        features: list[int],
+        labels: list[int]
+) -> Annotated[list[int], "operation"]:
+    operation = features + labels
+    logger.info(f"Addition of two cols {operation}")
+    return operation
+
 
 @pipeline
 def io_pipeline():
     features, labels = load_data()
+    add_col(features, labels)
     count_rows(features, labels)
 
 if __name__ == "__main__":
@@ -46,6 +57,9 @@ if __name__ == "__main__":
         rows = step_output.row_count.load()
     else:
         rows = step_output.load()
+
+    addition = run.steps['add_col'].output.load()
+    logger.info(f"Addition of two rows is {addition}")
 
     logger.info(f"Pipeline completed with {rows} rows")
     log_dashboard_urls("io_pipeline")

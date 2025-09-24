@@ -5,7 +5,7 @@ from zenml import ArtifactConfig, Tag, add_tags, pipeline, step
 from zenml.logger import get_logger
 
 try:
-    from utils import log_dashboard_urls
+    from utils import log_dashboard_urls # type: ignore
 except ImportError:
     log_dashboard_urls = lambda name: print(f" Pipeline '{name} completd!")
 
@@ -41,3 +41,25 @@ def process_data(
     processed["feature_1"] = (
         processed["feature_1"] / processed["feature_1"].max()
     )
+
+    processed["feature_2"] = (
+        processed["feature_2"] / processed["feature_2"].max()
+    )
+
+    #Add tags
+    add_tags(tags=["normalized", "ready_for_training"], infer_artifact=True)
+
+    logger.info("Processed data with Normalization")
+    return processed
+
+
+@pipeline(tags=["Tutorial Example", Tag(name="Experiment", cascade=True)])
+def run_pipeline():
+    data = create_raw_data()
+    processed_data = process_data(data)
+    return processed_data
+
+if __name__=="__main__":
+    run_pipeline()
+    log_dashboard_urls("run_pipeline")
+    logger.info("Run to see how tags works")

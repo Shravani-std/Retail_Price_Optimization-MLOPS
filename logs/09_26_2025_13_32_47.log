@@ -1,0 +1,12 @@
+2025-09-26 13:32:47,441 - root - INFO - Data loaded Successfully from data/retail_price.csv
+2025-09-26 13:32:47,441 - root - INFO - 'load_data' executed in 0.0048s
+2025-09-26 13:32:47,453 - root - INFO - Starting ETL process with CategoricalEncoder and OutlierHandler...
+2025-09-26 13:32:47,456 - root - INFO - Data loaded successfully from /media/shrav/New Volume/AI/MLOPS/Retail_Price_Optimization-MLOPS-/data/retail_price.csv with shape (676, 30)
+2025-09-26 13:32:47,456 - root - INFO - Running fit_transform for CategoricalEncoder on columns=['product_id', 'product_category_name']
+2025-09-26 13:32:47,456 - root - INFO - Fitting CategoricalEncoder with method=onehot on columns=['product_id', 'product_category_name']
+2025-09-26 13:32:47,456 - root - ERROR - Error while fitting CategoricalEncoder.
+2025-09-26 13:32:47,456 - root - ERROR - Error occurred in python script name [/media/shrav/New Volume/AI/MLOPS/Retail_Price_Optimization-MLOPS-/src/data_preprocessing.py] line number [25] error message [OneHotEncoder.__init__() got an unexpected keyword argument 'sparse']
+2025-09-26 13:32:47,456 - root - ERROR - Error in fit_transform of CategoricalEncoder.
+2025-09-26 13:32:47,456 - root - ERROR - Error occurred in python script name [/media/shrav/New Volume/AI/MLOPS/Retail_Price_Optimization-MLOPS-/src/data_preprocessing.py] line number [34] error message [Error occurred in python script name [/media/shrav/New Volume/AI/MLOPS/Retail_Price_Optimization-MLOPS-/src/data_preprocessing.py] line number [25] error message [OneHotEncoder.__init__() got an unexpected keyword argument 'sparse']]
+2025-09-26 13:32:47,456 - root - ERROR - Error occurred during ETL process.
+2025-09-26 13:32:47,456 - root - ERROR - Error occurred in python script name [/media/shrav/New Volume/AI/MLOPS/Retail_Price_Optimization-MLOPS-/src/data_preprocessing.py] line number [64] error message [Error occurred in python script name [/media/shrav/New Volume/AI/MLOPS/Retail_Price_Optimization-MLOPS-/src/data_preprocessing.py] line number [34] error message [Error occurred in python script name [/media/shrav/New Volume/AI/MLOPS/Retail_Price_Optimization-MLOPS-/src/data_preprocessing.py] line number [25] error message [OneHotEncoder.__init__() got an unexpected keyword argument 'sparse']]]

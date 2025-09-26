@@ -1,0 +1,19 @@
+2025-09-26 13:34:10,801 - root - INFO - Data loaded Successfully from data/retail_price.csv
+2025-09-26 13:34:10,801 - root - INFO - 'load_data' executed in 0.0030s
+2025-09-26 13:34:10,811 - root - INFO - Starting ETL process with CategoricalEncoder and OutlierHandler...
+2025-09-26 13:34:10,814 - root - INFO - Data loaded successfully from /media/shrav/New Volume/AI/MLOPS/Retail_Price_Optimization-MLOPS-/data/retail_price.csv with shape (676, 30)
+2025-09-26 13:34:10,814 - root - INFO - Running fit_transform for CategoricalEncoder on columns=['product_id', 'product_category_name']
+2025-09-26 13:34:10,814 - root - INFO - Fitting CategoricalEncoder with method=onehot on columns=['product_id', 'product_category_name']
+2025-09-26 13:34:10,815 - root - INFO - CategoricalEncoder fitting completed successfully.
+2025-09-26 13:34:10,816 - root - INFO - Transforming dataframe using method=onehot on columns=['product_id', 'product_category_name']
+2025-09-26 13:34:10,827 - root - INFO - CategoricalEncoder transformation completed successfully.
+2025-09-26 13:34:10,845 - root - INFO - Categorical encoding completed. Encoded data saved at /media/shrav/New Volume/AI/MLOPS/Retail_Price_Optimization-MLOPS-/data/retail_prices_encoded.csv with shape (676, 89)
+2025-09-26 13:34:10,849 - root - INFO - Encoded DataFrame loaded for outlier handling with shape (676, 89)
+2025-09-26 13:34:10,849 - root - INFO - Running fit_transform for OutlierHandler on columns=['total_price', 'freight_price', 'unit_price']
+2025-09-26 13:34:10,849 - root - INFO - Fitting OutlierHandler on columns=['total_price', 'freight_price', 'unit_price'] with multiplier=1.5
+2025-09-26 13:34:10,852 - root - INFO - OutlierHandler fitting completed successfully.
+2025-09-26 13:34:10,852 - root - INFO - Transforming dataframe with OutlierHandler on columns=['total_price', 'freight_price', 'unit_price']
+2025-09-26 13:34:10,854 - root - INFO - OutlierHandler transformation completed successfully.
+2025-09-26 13:34:10,854 - root - INFO - Outlier handling completed. Transformed DataFrame shape: (676, 89)
+2025-09-26 13:34:10,854 - root - INFO - Outliers detected: 167 rows
+2025-09-26 13:34:10,870 - root - INFO - Final transformed DataFrame saved at /media/shrav/New Volume/AI/MLOPS/Retail_Price_Optimization-MLOPS-/data/retail_prices_transformed.csv

@@ -1,0 +1,4 @@
+2025-09-27 12:23:18,435 - root - INFO - Data loaded successfully
+2025-09-27 12:23:18,436 - root - INFO - Dropped columns: ['month_year']
+2025-09-27 12:23:18,436 - root - ERROR - An error occurred in main execution: No data left after removing NaNs/inf. Check CSV file!
+2025-09-27 12:23:18,436 - root - ERROR - Error occurred in python script name [/media/shrav/New Volume/AI/MLOPS/Retail_Price_Optimization-MLOPS-/src/model.py] line number [238] error message [Error in main execution]

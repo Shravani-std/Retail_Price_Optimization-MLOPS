@@ -1,0 +1,1 @@
+2025-09-27 12:13:32,659 - root - ERROR - An error occurred in main execution: [Errno 2] No such file or directory: '/path/to/retail_prices_encoded_date.csv'

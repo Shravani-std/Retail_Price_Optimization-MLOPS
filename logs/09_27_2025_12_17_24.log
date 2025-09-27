@@ -1,0 +1,3 @@
+2025-09-27 12:17:24,964 - root - INFO - Data loaded successfully
+2025-09-27 12:17:24,965 - root - ERROR - An error occurred in main execution: "['id'] not found in axis"
+2025-09-27 12:17:24,965 - root - ERROR - Error occurred in python script name [/home/shrav/.local/lib/python3.11/site-packages/pandas/core/indexes/base.py] line number [7136] error message ["['id'] not found in axis"]

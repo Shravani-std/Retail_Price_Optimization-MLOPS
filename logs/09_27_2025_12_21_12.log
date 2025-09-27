@@ -1,0 +1,6 @@
+2025-09-27 12:21:12,650 - root - INFO - Data loaded successfully
+2025-09-27 12:21:12,650 - root - INFO - Dropped columns: ['month_year']
+2025-09-27 12:21:12,651 - root - ERROR - Error in splitting data: With n_samples=0, test_size=0.2 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.
+2025-09-27 12:21:12,651 - root - ERROR - Error occurred in python script name [/home/shrav/.local/lib/python3.11/site-packages/sklearn/model_selection/_split.py] line number [2499] error message [With n_samples=0, test_size=0.2 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.]
+2025-09-27 12:21:12,651 - root - ERROR - An error occurred in main execution: Error occurred in python script name [/home/shrav/.local/lib/python3.11/site-packages/sklearn/model_selection/_split.py] line number [2499] error message [With n_samples=0, test_size=0.2 and train_size=None, the resulting train set will be empty. Adjust any of the aforementioned parameters.]
+2025-09-27 12:21:12,651 - root - ERROR - Error occurred in python script name [/media/shrav/New Volume/AI/MLOPS/Retail_Price_Optimization-MLOPS-/src/model.py] line number [37] error message [Error in main execution]

@@ -1,0 +1,8 @@
+2025-09-27 11:12:23,429 - root - INFO - Starting date feature enginneri9ng process...
+2025-09-27 11:12:23,434 - root - INFO - Data loaded from /media/shrav/New Volume/AI/MLOPS/Retail_Price_Optimization-MLOPS-/data/retail_prices_transformed.csv with shape (676, 89)
+2025-09-27 11:12:23,434 - root - INFO - Running DateFeatureEngineer with columns=['month_year'] and formate=%Y-%m-%d
+2025-09-27 11:12:23,434 - root - INFO - Splitting column 'month_year' into month and year
+2025-09-27 11:12:23,436 - root - WARNING - Some rows in 'month_year' could not be parsed with format %Y-%m-%d 
+2025-09-27 11:12:23,437 - root - INFO - Date Feature engineering completed sucessfully.
+2025-09-27 11:12:23,437 - root - ERROR - Error occured during date feature Enginerring process
+2025-09-27 11:12:23,437 - root - ERROR - Error occurred in python script name [/media/shrav/New Volume/AI/MLOPS/Retail_Price_Optimization-MLOPS-/src/feature_eng.py] line number [61] error message ['NoneType' object has no attribute 'to_csv']

@@ -1,0 +1,7 @@
+2025-09-27 12:19:09,537 - root - INFO - Data loaded successfully
+2025-09-27 12:19:09,537 - root - INFO - Dropped columns: ['month_year']
+2025-09-27 12:19:09,538 - root - INFO - Data split successfully
+2025-09-27 12:19:09,539 - root - INFO - Data split into train and test sets
+2025-09-27 12:19:09,544 - root - ERROR - Error in training Linear Regression model: exog contains inf or nans
+2025-09-27 12:19:09,544 - root - ERROR - An error occurred in main execution: CustomException.__init__() missing 1 required positional argument: 'error_detail'
+2025-09-27 12:19:09,544 - root - ERROR - Error occurred in python script name [/media/shrav/New Volume/AI/MLOPS/Retail_Price_Optimization-MLOPS-/src/model.py] line number [62] error message [CustomException.__init__() missing 1 required positional argument: 'error_detail']

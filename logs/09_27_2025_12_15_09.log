@@ -1,0 +1,2 @@
+2025-09-27 12:15:09,065 - root - ERROR - An error occurred in main execution: [Errno 2] No such file or directory: '/path/to/retail_prices_encoded_date.csv'
+2025-09-27 12:15:09,065 - root - ERROR - Error occurred in python script name [/home/shrav/.local/lib/python3.11/site-packages/pandas/io/common.py] line number [873] error message [[Errno 2] No such file or directory: '/path/to/retail_prices_encoded_date.csv']

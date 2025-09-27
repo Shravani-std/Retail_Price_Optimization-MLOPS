@@ -1,0 +1,7 @@
+2025-09-27 11:16:26,750 - root - INFO - Data loaded successfully with shape (676, 89)
+2025-09-27 11:16:26,750 - root - INFO - Running DateFeatureEngineer with columns=['month_year'] and format=%Y-%m-%d
+2025-09-27 11:16:26,750 - root - INFO - Splitting column 'month_year' into month and year
+2025-09-27 11:16:26,751 - root - WARNING - Some rows in 'month_year' could not be parsed with format %Y-%m-%d
+2025-09-27 11:16:26,752 - root - INFO - Successfully split column 'month_year' into 'month_year_month' and 'month_year_year'
+2025-09-27 11:16:26,752 - root - INFO - Date Feature engineering completed successfully.
+2025-09-27 11:16:26,780 - root - INFO - Transformed data saved to /media/shrav/New Volume/AI/MLOPS/Retail_Price_Optimization-MLOPS-/data/retail_prices_transformed_date.csv

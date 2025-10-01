@@ -1,13 +1,17 @@
-from abc import ABC, abstractmethod
+# from abc import ABC, abstractmethod
 from typing import List
 import sys
 import numpy as np
 import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder, OrdinalEncoder
-from src.data_loader import DataLoader
-from src.exception import CustomException
-from src.logger import logging
+# from src.data_loader import DataLoader
+from src.exception.exception import CustomException
+from src.logger.logger import logging
+from zenml.logger import get_logger
+from zenml import step
+
+logger = get_logger(__name__)
 
 
 class CategoricalEncoder:
@@ -63,6 +67,18 @@ class CategoricalEncoder:
             logging.error("Error in fit_transform of CategoricalEncoder.")
             raise CustomException(e, sys)
 
+@step
+def encode_categorical(df: pd.DataFrame, categorical_columns: List[str]) -> pd.DataFrame:
+    try:
+        encoder = CategoricalEncoder(method="onehot")
+        df_encoded = encoder.fit_transform(df, categorical_columns)
+        logger.info(f"Categorical encoding completed with shape {df.shape}")
+        return df_encoded
+    
+    except Exception as e:
+        logger.error("Error while encoding catgorical columns.")
+        raise CustomException(e, sys)
+    
 
 class OutlierHandler:
     def __init__(self, multiplier: float = 1.5):
@@ -110,53 +126,75 @@ class OutlierHandler:
         except Exception as e:
             logging.error("Error in fit_transform of OutlierHandler.")
             raise CustomException(e, sys)
-        
-
-
-
-
-
-
-
-"""
-
-if __name__ == "__main__":
+@step
+def handle_outliers(df: pd.DataFrame, numeric_columns: List[str]) -> pd.DataFrame:
     try:
-        logging.info("Starting ETL process with CategoricalEncoder and OutlierHandler...")
-
-        # --- Step 1: Load data from CSV ---
-        input_file = "/media/shrav/New Volume/AI/MLOPS/Retail_Price_Optimization-MLOPS-/data/retail_price.csv"   
-        df = pd.read_csv(input_file)
-        logging.info(f"Data loaded successfully from {input_file} with shape {df.shape}")
-
-        # --- Step 2: Encode categorical columns ---
-        categorical_columns = ["product_id", "product_category_name"] 
-        encoder = CategoricalEncoder(method="onehot")
-        df = encoder.fit_transform(df, columns=categorical_columns)
-
-        encoded_file = "/media/shrav/New Volume/AI/MLOPS/Retail_Price_Optimization-MLOPS-/data/retail_prices_encoded.csv"
-        df.to_csv(encoded_file, index=False)
-        logging.info(f"Categorical encoding completed. Encoded data saved at {encoded_file} with shape {df.shape}")
-
-        # --- Step 3: Load encoded data (if needed for next stage) ---
-        encoded_date_file = "/media/shrav/New Volume/AI/MLOPS/Retail_Price_Optimization-MLOPS-/data/retail_prices_encoded.csv" 
-        df = pd.read_csv(encoded_date_file)
-        logging.info(f"Encoded DataFrame loaded for outlier handling with shape {df.shape}")
-
-        # --- Step 4: Handle outliers ---
-        numeric_columns = ["total_price", "freight_price", "unit_price"] 
         outlier_handler = OutlierHandler(multiplier=1.5)
-        df_transformed = outlier_handler.fit_transform(df, columns=numeric_columns)
+        df_transformed = outlier_handler.fit_transform(df, numeric_columns)
+        logger.info(
+            f"Outlier handling completed. Transformed shape: {df_transformed.shape}, "
+            f"Outliers detected: {outlier_handler.outliers.shape[0]}"
+        )
 
-        logging.info(f"Outlier handling completed. Transformed DataFrame shape: {df_transformed.shape}")
-        logging.info(f"Outliers detected: {outlier_handler.outliers.shape[0]} rows")
-
-        # --- Step 5: Save transformed data ---
-        transformed_file = "/media/shrav/New Volume/AI/MLOPS/Retail_Price_Optimization-MLOPS-/data/retail_prices_transformed.csv"
-        df_transformed.to_csv(transformed_file, index=False)
-        logging.info(f"Final transformed DataFrame saved at {transformed_file}")
-
+        return df_transformed
     except Exception as e:
-        logging.error("Error occurred during ETL process.")
+        logger.error("Error while handling outliers.")
         raise CustomException(e, sys)
-"""
+    
+@step
+def save_data(df:pd.DataFrame, output_path : str)-> None:
+    try:
+        df.to_csv(output_path, index=False)
+        logger.info(f"Data saved successfullu at {output_path} with shape {df.shape}")
+    except Exception as e:
+        logger.error("Error while saving data.")
+        raise CustomException(e, sys)
+
+    
+
+
+
+
+
+
+
+
+# if __name__ == "__main__":
+#     try:
+#         logging.info("Starting ETL process with CategoricalEncoder and OutlierHandler...")
+
+#         # --- Step 1: Load data from CSV ---
+#         input_file = "/media/shrav/New Volume/AI/MLOPS/Retail_Price_Optimization-MLOPS-/data/retail_price.csv"   
+#         df = pd.read_csv(input_file)
+#         logging.info(f"Data loaded successfully from {input_file} with shape {df.shape}")
+
+#         # --- Step 2: Encode categorical columns ---
+#         categorical_columns = ["product_id", "product_category_name"] 
+#         encoder = CategoricalEncoder(method="onehot")
+#         df = encoder.fit_transform(df, columns=categorical_columns)
+
+#         encoded_file = "/media/shrav/New Volume/AI/MLOPS/Retail_Price_Optimization-MLOPS-/data/retail_prices_encoded.csv"
+#         df.to_csv(encoded_file, index=False)
+#         logging.info(f"Categorical encoding completed. Encoded data saved at {encoded_file} with shape {df.shape}")
+
+#         # --- Step 3: Load encoded data (if needed for next stage) ---
+#         encoded_date_file = "/media/shrav/New Volume/AI/MLOPS/Retail_Price_Optimization-MLOPS-/data/retail_prices_encoded.csv" 
+#         df = pd.read_csv(encoded_date_file)
+#         logging.info(f"Encoded DataFrame loaded for outlier handling with shape {df.shape}")
+
+#         # --- Step 4: Handle outliers ---
+#         numeric_columns = ["total_price", "freight_price", "unit_price"] 
+#         outlier_handler = OutlierHandler(multiplier=1.5)
+#         df_transformed = outlier_handler.fit_transform(df, columns=numeric_columns)
+
+#         logging.info(f"Outlier handling completed. Transformed DataFrame shape: {df_transformed.shape}")
+#         logging.info(f"Outliers detected: {outlier_handler.outliers.shape[0]} rows")
+
+#         # --- Step 5: Save transformed data ---
+#         transformed_file = "/media/shrav/New Volume/AI/MLOPS/Retail_Price_Optimization-MLOPS-/data/retail_prices_transformed.csv"
+#         df_transformed.to_csv(transformed_file, index=False)
+#         logging.info(f"Final transformed DataFrame saved at {transformed_file}")
+
+#     except Exception as e:
+#         logging.error("Error occurred during ETL process.")
+#         raise CustomException(e, sys)

@@ -1,17 +1,14 @@
-# from abc import ABC, abstractmethod
+from abc import ABC, abstractmethod
 from typing import List
 import sys
 import numpy as np
 import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder, OrdinalEncoder
-# from src.data_loader import DataLoader
+from src.steps.data_loader import DataLoader
 from src.exception.exception import CustomException
 from src.logger.logger import logging
-from zenml.logger import get_logger
-from zenml import step
 
-logger = get_logger(__name__)
 
 
 class CategoricalEncoder:
@@ -67,18 +64,6 @@ class CategoricalEncoder:
             logging.error("Error in fit_transform of CategoricalEncoder.")
             raise CustomException(e, sys)
 
-@step
-def encode_categorical(df: pd.DataFrame, categorical_columns: List[str]) -> pd.DataFrame:
-    try:
-        encoder = CategoricalEncoder(method="onehot")
-        df_encoded = encoder.fit_transform(df, categorical_columns)
-        logger.info(f"Categorical encoding completed with shape {df.shape}")
-        return df_encoded
-    
-    except Exception as e:
-        logger.error("Error while encoding catgorical columns.")
-        raise CustomException(e, sys)
-    
 
 class OutlierHandler:
     def __init__(self, multiplier: float = 1.5):
@@ -126,37 +111,6 @@ class OutlierHandler:
         except Exception as e:
             logging.error("Error in fit_transform of OutlierHandler.")
             raise CustomException(e, sys)
-@step
-def handle_outliers(df: pd.DataFrame, numeric_columns: List[str]) -> pd.DataFrame:
-    try:
-        outlier_handler = OutlierHandler(multiplier=1.5)
-        df_transformed = outlier_handler.fit_transform(df, numeric_columns)
-        logger.info(
-            f"Outlier handling completed. Transformed shape: {df_transformed.shape}, "
-            f"Outliers detected: {outlier_handler.outliers.shape[0]}"
-        )
-
-        return df_transformed
-    except Exception as e:
-        logger.error("Error while handling outliers.")
-        raise CustomException(e, sys)
-    
-@step
-def save_data(df:pd.DataFrame, output_path : str)-> None:
-    try:
-        df.to_csv(output_path, index=False)
-        logger.info(f"Data saved successfullu at {output_path} with shape {df.shape}")
-    except Exception as e:
-        logger.error("Error while saving data.")
-        raise CustomException(e, sys)
-
-    
-
-
-
-
-
-
 
 
 # if __name__ == "__main__":

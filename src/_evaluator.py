@@ -1,8 +1,8 @@
 from typing import List
 import sys
 import pandas as pd
-import statsmodels.api as sm # type: ignore
-from statsmodel.regression.linear_model import RegressionResultsWrapper # type: ignore
+import statsmodels.api as sm 
+from statsmodels.regression.linear_model import RegressionResultsWrapper 
 from typing_extensions import Annotated
 from zenml.logger import get_logger
 from src.exception.exception import CustomException

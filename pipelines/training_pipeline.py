@@ -13,6 +13,7 @@ from src._evaluator import evaluate
 from src._data_process import categoricsl_encode, feature_engineer
 from src._refine_model import remove_insignificant_vars
 from src._train_model import re_train, sklearn_train
+from zenml.integrations.deepchecks import DEEPCHECKS
 
 from src._deployment_trigger_step import deployment_trigger
 
@@ -37,3 +38,21 @@ def training_retail():
     decision = deployment_trigger(accuracy=rmse, min_accuracy=0.80)
     bento = bento_builder(model=model)
     bentoml_model_deployer(bento=bento, deploy_decision = decision)
+
+if __name__ == "__main__":
+    from zenml.client import Client
+
+    # Make sure there is an active ZenML stack
+    active_stack = Client().active_stack
+    if active_stack is None:
+        raise RuntimeError("No active ZenML stack found. Please set a stack first.")
+
+    # Print the experiment tracker URI to confirm
+    print("Experiment Tracker URI:", active_stack.experiment_tracker.get_tracking_uri())
+
+    # Run the pipeline
+    try:
+        training_retail().run()
+        print("Pipeline executed successfully!")
+    except Exception as e:
+        print(f"Pipeline execution failed: {e}")

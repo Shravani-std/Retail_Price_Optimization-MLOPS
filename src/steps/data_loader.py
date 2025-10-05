@@ -3,7 +3,7 @@ import pandas as pd
 from src.exception.exception import CustomException
 from src.logger.logger import logging
 import sys
-from utils.timer import timed
+import time
 
 
 class DataLoader:
@@ -15,6 +15,16 @@ class DataLoader:
         self.file_path = file_path
         self.data = None
 
+    def timed(func):
+        """Decorator for execution time logging"""
+        def wrapper(*args, **kwargs):
+            start = time.time()
+            result = func(*args, **kwargs)
+            end = time.time()
+            logging.info(f"'{func.__name__}' executed in {end - start:.4f}s")
+            print(f"'{func.__name__}' executed in {end - start:.4f}s")
+            return result
+        return wrapper
    
     @timed
     def load_data(self, sheet_name: str = 0) -> pd.DataFrame:

@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from src.exception.exception import CustomException
 import sys
 from abc import ABC, abstractmethod
-import statsmodels.api as sm # type: ignore
+import statsmodels.api as sm 
 import numpy as np
 from sklearn.dummy import DummyRegressor
 from sklearn.metrics import make_scorer, mean_squared_error
@@ -17,6 +17,7 @@ from scipy.stats import shapiro
 from statsmodels.formula.api import ols # type: ignore
 from statsmodels.graphics.gofplots import qqplot # type: ignore
 from src.logger.logger import logging
+
 
 class DataSplitter:
     def __init__(self, df: pd.DataFrame, features: List[str], target: str, test_size: float = 0.2):

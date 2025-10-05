@@ -41,9 +41,11 @@ def feature_engineer(df: pd.DataFrame) -> pd.DataFrame:
 
         logger.info("Feature engineering applied sucessfully")
 
-        df_transf.drop(["id", "month_year"], axis=1, inplace=True)
+        df_transf.drop(columns=[col for col in ["month_year"] if col in df_transf], inplace=True)
+
 
         return df_transf
     except Exception as e:
-        logger.error("Error in feature enginnering.", e)
+        logger.error(f"Error in feature engineering: {e}")
+
         raise CustomException(e, sys)
